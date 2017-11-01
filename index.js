@@ -1,20 +1,27 @@
-const testFolder = './videos/';
+var testFolder = './videos/';
 const fs = require('fs');
 
 var addic7edApi = require('addic7ed-api');
 
+process.argv.forEach(function (val, index, array) {
+  if(val.indexOf('node') > 0 || val.indexOf('index.js') > 0 || val.indexOf('addic7ed') > 0){
+    return;
+  }
+  testFolder = val;
+});
+
 function downloadFileSubtitles(folderName){
   fs.readdir(folderName, (err, files) => {
-
-    console.log(files);
     files.forEach(file => {
       if(fs.lstatSync(folderName + file).isDirectory()) {
         downloadFileSubtitles(folderName + file + '/');
       }
       else {
-        if(file === '.DS_Store'){
+        if(file.split('.').length < 2 || file.split('.')[0].length < 1){
+          console.log('ignored', file, file.split('.')[0].length);
           return;
         }
+        console.log(file, file.split('.'));
         const se =  file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)[0];
         if(!se){
           return;
