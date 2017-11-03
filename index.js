@@ -22,7 +22,11 @@ function downloadFileSubtitles(folderName){
           return;
         }
         console.log(file, file.split('.'));
-        const se =  file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)[0];
+        const seTbl = file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)
+        if(!seTbl) {
+          return ;
+        }
+        const se =  seTbl[0];
         if(!se){
           return;
         }
