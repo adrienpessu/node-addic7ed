@@ -33,8 +33,6 @@ function downloadFileSubtitles(folderName){
         //console.log(file);
         const fileWithoutExtension = file.replace(/\.[^/.]+$/, '');
         const subtitleFile = folderName + fileWithoutExtension + '.srt';
-        console.log(subtitleFile, fs.existsSync(subtitleFile))
-
         if (!fs.existsSync(subtitleFile)) {
           
           const season = se.replace('S', '').split('E')[0];
