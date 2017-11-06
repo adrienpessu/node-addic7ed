@@ -18,10 +18,10 @@ function downloadFileSubtitles(folderName){
       }
       else {
         if(file.split('.').length < 2 || file.split('.')[0].length < 1){
-          console.log('ignored', file, file.split('.')[0].length);
+          //console.log('ignored', file, file.split('.')[0].length);
           return;
         }
-        console.log(file, file.split('.'));
+        //console.log(file, file.split('.'));
         const seTbl = file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)
         if(!seTbl) {
           return ;
@@ -30,10 +30,12 @@ function downloadFileSubtitles(folderName){
         if(!se){
           return;
         }
-        console.log(file);
+        //console.log(file);
         const fileWithoutExtension = file.replace(/\.[^/.]+$/, '');
         const subtitleFile = folderName + fileWithoutExtension + '.srt';
-        if (!fs.existsSync(folderName + subtitleFile)) {
+        console.log(subtitleFile, fs.existsSync(subtitleFile))
+
+        if (!fs.existsSync(subtitleFile)) {
           
           const season = se.replace('S', '').split('E')[0];
           const episode = se.replace('S', '').split('E')[1];
