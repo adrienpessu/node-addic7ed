@@ -11,7 +11,7 @@ class Addicted {
 
   isItVideoFromFilename(fileName){
     const re = /(?:\.([^.]+))?$/.exec(fileName);
-    return ez && re.length > 0 && videoType.indexOf(re[1]) > -1;
+    return re && re.length > 0 && videoType.indexOf(re[1]) > -1;
   }
 
   searchAndDownload(folderName, file, langId){
