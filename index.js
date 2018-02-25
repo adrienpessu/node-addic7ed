@@ -5,12 +5,26 @@ var addic7edApi = require('addic7ed-api');
 
 const langs = { 'fre': 'fr', 'eng': 'en' };  
 
+const videoType = ['avi', 'mkv', 'mpg'];
+
 class Addicted {
+
+  isItVideoFromFilename(fileName){
+    const re = /(?:\.([^.]+))?$/;
+    console.log(re.exec(fileName)[1]);
+    console.log(videoType.indexOf(re.exec(fileName)[1]));
+    return videoType.indexOf(re.exec(fileName)[1]) > -1;
+  }
+
   searchAndDownload(folderName, file, langId){
     if(file.split('.').length < 2 || file.split('.')[0].length < 1){
       //console.log('ignored', file, file.split('.')[0].length);
       return;
     }
+
+    if(!this.isItVideoFromFilename(file)){
+    }
+    return;
     //console.log(file, file.split('.'));
     const seTbl = file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)
     if(!seTbl) {
