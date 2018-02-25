@@ -5,10 +5,22 @@ var addic7edApi = require('addic7ed-api');
 
 const langs = { 'fre': 'fr', 'eng': 'en' };  
 
+const videoType = ['avi', 'mkv', 'mp4', 'mpg'];
+
 class Addicted {
+
+  isItVideoFromFilename(fileName){
+    const re = /(?:\.([^.]+))?$/.exec(fileName);
+    return re && re.length > 0 && videoType.indexOf(re[1]) > -1;
+  }
+
   searchAndDownload(folderName, file, langId){
     if(file.split('.').length < 2 || file.split('.')[0].length < 1){
       //console.log('ignored', file, file.split('.')[0].length);
+      return;
+    }
+
+    if(!this.isItVideoFromFilename(file)){
       return;
     }
     //console.log(file, file.split('.'));
