@@ -5,14 +5,12 @@ var addic7edApi = require('addic7ed-api');
 
 const langs = { 'fre': 'fr', 'eng': 'en' };  
 
-const videoType = ['avi', 'mkv', 'mpg'];
+const videoType = ['avi', 'mkv', 'mp4', 'mpg'];
 
 class Addicted {
 
   isItVideoFromFilename(fileName){
     const re = /(?:\.([^.]+))?$/;
-    console.log(re.exec(fileName)[1]);
-    console.log(videoType.indexOf(re.exec(fileName)[1]));
     return videoType.indexOf(re.exec(fileName)[1]) > -1;
   }
 
@@ -23,8 +21,8 @@ class Addicted {
     }
 
     if(!this.isItVideoFromFilename(file)){
+      return;
     }
-    return;
     //console.log(file, file.split('.'));
     const seTbl = file.match(/S?0*(\d+)?[xE]0*(\d+)/gm)
     if(!seTbl) {
