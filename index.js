@@ -10,8 +10,8 @@ const videoType = ['avi', 'mkv', 'mp4', 'mpg'];
 class Addicted {
 
   isItVideoFromFilename(fileName){
-    const re = /(?:\.([^.]+))?$/;
-    return videoType.indexOf(re.exec(fileName)[1]) > -1;
+    const re = /(?:\.([^.]+))?$/.exec(fileName);
+    return ez && re.length > 0 && videoType.indexOf(re[1]) > -1;
   }
 
   searchAndDownload(folderName, file, langId){
