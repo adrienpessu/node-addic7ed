@@ -42,14 +42,19 @@ class Addicted {
   
       const seriesRaw = file.substr(0, file.indexOf(se));
       const series = seriesRaw.replace(/\./g, ' ');
+      let founded = false;
       addic7edApi.search(series, season, episode, langId).then(function (subtitlesList) {
           const subInfo = subtitlesList[0];
           if (subInfo) {
             addic7edApi.download(subInfo, subtitleFile).then(function () {
               console.log(subtitleFile);
+	      founded = true;
             }, (error) => console.log('error : ', error));
           }
       }, (error) => console.log('error : ', error));
+      if(!founded){
+	   console.log("not founded : ", series, season, episode, langId);
+       }
     }
   }
 
